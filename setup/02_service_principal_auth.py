@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "5"
+# ///
 # MAGIC %md
 # MAGIC # Service Principal Authentication
 # MAGIC
@@ -11,8 +15,10 @@
 
 import requests
 
-CLIENT_ID = "<APPLICATION_ID_UUID>"
-CLIENT_SECRET = "<CLIENT_SECRET>"
+CLIENT_ID = dbutils.secrets.get(scope="olist-agent", key="sp-client-id")
+CLIENT_SECRET = dbutils.secrets.get(scope="olist-agent", key="sp-client-secret")
+
+
 WORKSPACE_URL = "https://dbc-cefde690-e45c.cloud.databricks.com"
 
 token_response = requests.post(
